@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Leave Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('download.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-top: 10px;
+    }
+
+    input, select {
+        padding: 10px;
+        margin: 5px 0;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #leave-list {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    #leave-requests {
+        list-style: none;
+    }
+
+    #leave-requests li {
+        margin: 10px;
+    }
+
+</style>
+<body>
+    <h1>Student Leave Management System</h1>
+    <div class="form-container">
+        <form id="leave-form">
+            <label for="student-name">Student Name:</label>
+            <input type="text" id="student-name" required>
+
+            <label for="leave-type">Leave Type:</label>
+            <select id="leave-type">
+                <option value="sick">Medical</option>
+                <option value="vacation">Casual</option>
+            </select>
+
+            <label for="leave-date">Leave Date:</label>
+            <input type="date" id="leave-date" required>
+
+
+            <button type="submit">Submit Leave Request</button>
+        </form>
+    </div>
+    <div id="leave-list">
+        <h2>Leave Requests</h2>
+        <ul id="leave-requests"></ul>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // JavaScript code (script.js)
+document.getElementById('leave-form').addEventListener('input', updateNoOfDays);
+
+function updateNoOfDays() {
+    const leaveDateInput = document.getElementById('leave-date');
+    const noOfDaysTag = document.getElementById('no-of-days-tag');
+
+    // Calculate the number of days based on the selected date
+    // You may need to implement your own logic here
+    const selectedDate = new Date(leaveDateInput.value);
+    const currentDate = new Date();
+    const timeDifference = selectedDate - currentDate;
+    const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+    if (daysDifference >= 0) {
+        noOfDaysTag.textContent = daysDifference;
+    } else {
+        noOfDaysTag.textContent = '0'; // Reset to 0 if the date is in the past
+    }
+}
+
+    </script>
+</body>
+</html>
